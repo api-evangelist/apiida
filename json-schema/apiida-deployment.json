@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "apiida-deployment.json",
+  "title": "APIIDA Deployment",
+  "description": "An API deployment operation that provisions a specific API version to one or more managed gateways.",
+  "type": "object",
+  "required": ["id", "apiId", "version", "targetGateways", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique deployment identifier"
+    },
+    "apiId": {
+      "type": "string",
+      "description": "Identifier of the API being deployed"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the API being deployed"
+    },
+    "targetGateways": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of target gateway identifiers"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "in_progress", "completed", "failed", "rolled_back"],
+      "description": "Current status of the deployment"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the deployment was initiated"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the deployment completed or failed"
+    }
+  }
+}

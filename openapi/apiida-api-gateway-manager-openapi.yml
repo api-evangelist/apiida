@@ -1,0 +1,592 @@
+openapi: 3.1.0
+info:
+  title: APIIDA API Gateway Manager
+  description: >-
+    REST API for the APIIDA API Gateway Manager, enabling programmatic
+    management of Broadcom Layer7 API gateways. Supports gateway
+    registration, API deployment and migration, monitoring and metrics
+    collection, and alarm configuration across managed gateway instances.
+  version: '1.0'
+  contact:
+    name: APIIDA Support
+    url: https://www.apiida.com
+externalDocs:
+  description: APIIDA API Gateway Manager Documentation
+  url: https://apiida.atlassian.net/wiki/spaces/AAGM
+servers:
+  - url: https://{tenant}.backend.apiida.io
+    description: APIIDA Backend
+    variables:
+      tenant:
+        description: Your APIIDA tenant identifier
+        default: example
+tags:
+  - name: Gateways
+    description: Gateway registration and management operations
+  - name: APIs
+    description: API lifecycle management on gateways
+  - name: Deployments
+    description: API deployment and migration operations
+  - name: Monitoring
+    description: Metrics and monitoring operations
+  - name: Alarms
+    description: Alarm configuration and management
+security:
+  - bearerAuth: []
+paths:
+  /gateways:
+    get:
+      operationId: listGateways
+      summary: List managed gateways
+      description: >-
+        Retrieve a list of all registered and managed Layer7 API gateway
+        instances.
+      tags:
+        - Gateways
+      parameters:
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: List of managed gateways
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Gateway'
+                  total:
+                    type: integer
+                    description: Total number of gateways
+        '401':
+          description: Unauthorized
+    post:
+      operationId: registerGateway
+      summary: Register a gateway
+      description: >-
+        Register a new Layer7 API gateway instance for management by APIIDA.
+      tags:
+        - Gateways
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayRegistration'
+      responses:
+        '201':
+          description: Gateway registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+        '400':
+          description: Invalid gateway configuration
+        '401':
+          description: Unauthorized
+  /gateways/{gatewayId}:
+    get:
+      operationId: getGateway
+      summary: Get gateway details
+      description: >-
+        Retrieve detailed information about a specific managed gateway.
+      tags:
+        - Gateways
+      parameters:
+        - $ref: '#/components/parameters/gatewayId'
+      responses:
+        '200':
+          description: Gateway details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Gateway not found
+    put:
+      operationId: updateGateway
+      summary: Update gateway configuration
+      description: >-
+        Update the configuration of a registered gateway.
+      tags:
+        - Gateways
+      parameters:
+        - $ref: '#/components/parameters/gatewayId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayRegistration'
+      responses:
+        '200':
+          description: Gateway updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Gateway'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Gateway not found
+    delete:
+      operationId: removeGateway
+      summary: Remove a gateway
+      description: >-
+        Unregister and remove a gateway from management.
+      tags:
+        - Gateways
+      parameters:
+        - $ref: '#/components/parameters/gatewayId'
+      responses:
+        '204':
+          description: Gateway removed successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Gateway not found
+  /gateways/{gatewayId}/apis:
+    get:
+      operationId: listGatewayApis
+      summary: List APIs on a gateway
+      description: >-
+        Retrieve a list of all APIs deployed on a specific gateway.
+      tags:
+        - APIs
+      parameters:
+        - $ref: '#/components/parameters/gatewayId'
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: List of APIs on the gateway
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GatewayApi'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+        '404':
+          description: Gateway not found
+  /deployments:
+    get:
+      operationId: listDeployments
+      summary: List deployments
+      description: >-
+        Retrieve a list of API deployments across managed gateways.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/offset'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: List of deployments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deployment'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createDeployment
+      summary: Create a deployment
+      description: >-
+        Initiate a new API deployment or migration to one or more gateways.
+      tags:
+        - Deployments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentRequest'
+      responses:
+        '201':
+          description: Deployment initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '400':
+          description: Invalid deployment request
+        '401':
+          description: Unauthorized
+  /deployments/{deploymentId}:
+    get:
+      operationId: getDeployment
+      summary: Get deployment status
+      description: >-
+        Retrieve the status and details of a specific deployment.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/deploymentId'
+      responses:
+        '200':
+          description: Deployment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Deployment not found
+  /gateways/{gatewayId}/metrics:
+    get:
+      operationId: getGatewayMetrics
+      summary: Get gateway metrics
+      description: >-
+        Retrieve performance and usage metrics for a specific gateway.
+        Requires the APIIDA solution kit installed on the gateway.
+      tags:
+        - Monitoring
+      parameters:
+        - $ref: '#/components/parameters/gatewayId'
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: Start of the time range
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date-time
+          description: End of the time range
+      responses:
+        '200':
+          description: Gateway metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metrics'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Gateway not found
+  /alarms:
+    get:
+      operationId: listAlarms
+      summary: List alarm configurations
+      description: >-
+        Retrieve all configured alarm rules for monitored gateways.
+      tags:
+        - Alarms
+      responses:
+        '200':
+          description: List of alarm configurations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Alarm'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAlarm
+      summary: Create an alarm
+      description: >-
+        Create a new alarm rule for gateway monitoring.
+      tags:
+        - Alarms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlarmRequest'
+      responses:
+        '201':
+          description: Alarm created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          description: Invalid alarm configuration
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+  parameters:
+    gatewayId:
+      name: gatewayId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The gateway identifier
+    deploymentId:
+      name: deploymentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The deployment identifier
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+      description: Maximum number of items to return
+  schemas:
+    Gateway:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique gateway identifier
+        name:
+          type: string
+          description: Display name of the gateway
+        host:
+          type: string
+          description: Hostname or IP of the gateway
+        port:
+          type: integer
+          description: Gateway management port
+        status:
+          type: string
+          enum:
+            - connected
+            - disconnected
+            - error
+          description: Current connection status
+        type:
+          type: string
+          description: Gateway type (e.g. Layer7)
+        version:
+          type: string
+          description: Gateway software version
+        apiCount:
+          type: integer
+          description: Number of APIs deployed on this gateway
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    GatewayRegistration:
+      type: object
+      required:
+        - name
+        - host
+        - port
+      properties:
+        name:
+          type: string
+          description: Display name of the gateway
+        host:
+          type: string
+          description: Hostname or IP of the gateway
+        port:
+          type: integer
+          description: Gateway management port
+        type:
+          type: string
+          description: Gateway type
+        credentials:
+          type: object
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+          description: Credentials for connecting to the gateway
+    GatewayApi:
+      type: object
+      properties:
+        id:
+          type: string
+          description: API identifier on the gateway
+        name:
+          type: string
+          description: API name
+        version:
+          type: string
+          description: API version
+        status:
+          type: string
+          enum:
+            - active
+            - disabled
+            - deprecated
+          description: API status on the gateway
+        lastDeployed:
+          type: string
+          format: date-time
+    Deployment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Deployment identifier
+        apiId:
+          type: string
+          description: API being deployed
+        version:
+          type: string
+          description: API version being deployed
+        targetGateways:
+          type: array
+          items:
+            type: string
+          description: Target gateway identifiers
+        status:
+          type: string
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - failed
+            - rolled_back
+          description: Current deployment status
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+    DeploymentRequest:
+      type: object
+      required:
+        - apiId
+        - version
+        - targetGateways
+      properties:
+        apiId:
+          type: string
+          description: API identifier to deploy
+        version:
+          type: string
+          description: API version to deploy
+        targetGateways:
+          type: array
+          items:
+            type: string
+          description: List of gateway identifiers to deploy to
+    Metrics:
+      type: object
+      properties:
+        gatewayId:
+          type: string
+        period:
+          type: object
+          properties:
+            from:
+              type: string
+              format: date-time
+            to:
+              type: string
+              format: date-time
+        requestCount:
+          type: integer
+          description: Total API requests in the period
+        errorCount:
+          type: integer
+          description: Total error responses in the period
+        averageLatency:
+          type: number
+          format: double
+          description: Average response latency in milliseconds
+        throughput:
+          type: number
+          format: double
+          description: Requests per second
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Alarm identifier
+        name:
+          type: string
+          description: Alarm name
+        gatewayId:
+          type: string
+          description: Target gateway identifier
+        metric:
+          type: string
+          description: Metric to monitor
+        threshold:
+          type: number
+          description: Threshold value to trigger alarm
+        condition:
+          type: string
+          enum:
+            - above
+            - below
+            - equals
+          description: Threshold comparison condition
+        enabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    AlarmRequest:
+      type: object
+      required:
+        - name
+        - gatewayId
+        - metric
+        - threshold
+        - condition
+      properties:
+        name:
+          type: string
+        gatewayId:
+          type: string
+        metric:
+          type: string
+        threshold:
+          type: number
+        condition:
+          type: string
+          enum:
+            - above
+            - below
+            - equals
+        enabled:
+          type: boolean
+          default: true

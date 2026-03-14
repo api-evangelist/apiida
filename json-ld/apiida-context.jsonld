@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "apiida": "https://apiida.com/ns/",
+    "id": "@id",
+    "type": "@type",
+    "Api": "apiida:Api",
+    "Gateway": "apiida:Gateway",
+    "Deployment": "apiida:Deployment",
+    "Alarm": "apiida:Alarm",
+    "Metrics": "apiida:Metrics",
+    "name": "schema:name",
+    "description": "schema:description",
+    "version": "schema:version",
+    "status": "apiida:status",
+    "host": "apiida:host",
+    "port": "apiida:port",
+    "gatewayType": "apiida:gatewayType",
+    "apiCount": "apiida:apiCount",
+    "apiId": "apiida:apiId",
+    "targetGateways": {
+      "@id": "apiida:targetGateways",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "currentVersion": "apiida:currentVersion",
+    "threshold": "apiida:threshold",
+    "condition": "apiida:condition",
+    "metric": "apiida:metric",
+    "enabled": "apiida:enabled",
+    "requestCount": "apiida:requestCount",
+    "errorCount": "apiida:errorCount",
+    "averageLatency": "apiida:averageLatency",
+    "throughput": "apiida:throughput",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    },
+    "completedAt": {
+      "@id": "apiida:completedAt",
+      "@type": "schema:DateTime"
+    },
+    "tags": {
+      "@id": "schema:keywords",
+      "@container": "@set"
+    }
+  }
+}
