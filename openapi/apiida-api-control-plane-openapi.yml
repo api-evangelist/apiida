@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: APIIDA API Control Plane
+  description: >-
+    REST API for the APIIDA API Control Plane, enabling programmatic management
+    of APIs across multiple API gateways. Supports validation of proxy
+    specifications, API version management, and deployment to gateways.
+  version: '1.0'
+  contact:
+    name: APIIDA Support
+    url: https://www.apiida.com
+externalDocs:
+  description: APIIDA Documentation
+  url: https://apiida.atlassian.net
+servers:
+  - url: https://{tenant}.backend.apiida.io
+    description: APIIDA Backend
+    variables:
+      tenant:
+        description: Your APIIDA tenant identifier
+        default: example
+tags:
+  - name: APIs
+    description: API management operations
+  - name: Versions
+    description: API version management
+  - name: Deployments
+    description: Gateway deployment operations
+security:
+  - bearerAuth: []
+paths:
+  /apis/analyzeOpenProxySpec:
+    post:
+      operationId: analyzeOpenProxySpec
+      summary: Validate Open Proxy Specification
+      description: >-
+        Validate an Open Proxy Specification file to check for errors
+        and compatibility before creating API versions.
+      tags:
+        - APIs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spec:
+                  type: string
+                  description: The Open Proxy Specification content to validate
+      responses:
+        '200':
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Whether the specification is valid
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of validation errors if any
+        '401':
+          description: Unauthorized
+  /apis/{apiId}/versions:
+    post:
+      operationId: createApiVersion
+      summary: Create API version
+      description: >-
+        Create a new version for an existing API in the control plane.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/apiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: Version identifier
+                description:
+                  type: string
+                  description: Version description
+      responses:
+        '201':
+          description: API version created successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: API not found
+  /apis/{apiId}/versions/{version}/openProxySpec:
+    put:
+      operationId: uploadOpenProxySpec
+      summary: Upload specification to API version
+      description: >-
+        Upload an Open Proxy Specification to a specific API version.
+      tags:
+        - Versions
+      parameters:
+        - $ref: '#/components/parameters/apiId'
+        - $ref: '#/components/parameters/version'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spec:
+                  type: string
+                  description: The Open Proxy Specification content
+      responses:
+        '200':
+          description: Specification uploaded successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: API or version not found
+  /apis/{apiId}/versions/{version}/importIntoGateways:
+    post:
+      operationId: deployToGateways
+      summary: Deploy API to gateways
+      description: >-
+        Deploy a specific API version to one or more connected API gateways.
+      tags:
+        - Deployments
+      parameters:
+        - $ref: '#/components/parameters/apiId'
+        - $ref: '#/components/parameters/version'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gatewayIds:
+                  type: array
+                  items:
+                    type: string
+                  description: List of gateway identifiers to deploy to
+      responses:
+        '200':
+          description: Deployment initiated successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: API or version not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+  parameters:
+    apiId:
+      name: apiId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The API identifier
+    version:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The API version identifier
