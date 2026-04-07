@@ -20,12 +20,10 @@ servers:
         description: Your APIIDA tenant identifier
         default: example
 tags:
-  - name: APIs
-    description: API management operations
-  - name: Versions
-    description: API version management
   - name: Deployments
     description: Gateway deployment operations
+  - name: Versions
+    description: API version management
 security:
   - bearerAuth: []
 paths:
@@ -36,8 +34,7 @@ paths:
       description: >-
         Validate an Open Proxy Specification file to check for errors
         and compatibility before creating API versions.
-      tags:
-        - APIs
+      tags: []
       requestBody:
         required: true
         content:

@@ -21,16 +21,14 @@ servers:
         description: Your APIIDA tenant identifier
         default: example
 tags:
-  - name: Gateways
-    description: Gateway registration and management operations
-  - name: APIs
-    description: API lifecycle management on gateways
-  - name: Deployments
-    description: API deployment and migration operations
-  - name: Monitoring
-    description: Metrics and monitoring operations
   - name: Alarms
     description: Alarm configuration and management
+  - name: Deployments
+    description: API deployment and migration operations
+  - name: Gateways
+    description: Gateway registration and management operations
+  - name: Monitoring
+    description: Metrics and monitoring operations
 security:
   - bearerAuth: []
 paths:
@@ -156,8 +154,7 @@ paths:
       summary: APIIDA List APIs on a gateway
       description: >-
         Retrieve a list of all APIs deployed on a specific gateway.
-      tags:
-        - APIs
+      tags: []
       parameters:
         - $ref: '#/components/parameters/gatewayId'
         - $ref: '#/components/parameters/offset'

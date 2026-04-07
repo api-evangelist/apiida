@@ -5,9 +5,8 @@ apis:
   - aid: apiida:api-control-plane
     name: APIIDA API Control Plane
     tags:
-      - API
-      - Platform
       - Lifecycle
+      - Platform
     humanURL: https://apiida.com/product/apiida-api-control-plane/
     properties:
       - url: https://apiida.com/product/apiida-api-control-plane/
@@ -28,9 +27,8 @@ apis:
   - aid: apiida:api-gateway-manager
     name: APIIDA API Gateway Manager
     tags:
-      - API
-      - Gateways
       - Deployments
+      - Gateways
       - Monitoring
     humanURL: https://apiida.com/product/apiida-api-gateway-manager/
     properties:
@@ -54,8 +52,8 @@ apis:
       collection, and alarm configuration across managed gateway instances.
 name: APIIDA
 tags:
-  - Platform
   - Gateways
+  - Platform
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
