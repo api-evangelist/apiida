@@ -32,7 +32,7 @@ paths:
   /apis/analyzeOpenProxySpec:
     post:
       operationId: analyzeOpenProxySpec
-      summary: Validate Open Proxy Specification
+      summary: APIIDA Validate Open Proxy Specification
       description: >-
         Validate an Open Proxy Specification file to check for errors
         and compatibility before creating API versions.
@@ -69,7 +69,7 @@ paths:
   /apis/{apiId}/versions:
     post:
       operationId: createApiVersion
-      summary: Create API version
+      summary: APIIDA Create API version
       description: >-
         Create a new version for an existing API in the control plane.
       tags:
@@ -99,7 +99,7 @@ paths:
   /apis/{apiId}/versions/{version}/openProxySpec:
     put:
       operationId: uploadOpenProxySpec
-      summary: Upload specification to API version
+      summary: APIIDA Upload specification to API version
       description: >-
         Upload an Open Proxy Specification to a specific API version.
       tags:
@@ -127,7 +127,7 @@ paths:
   /apis/{apiId}/versions/{version}/importIntoGateways:
     post:
       operationId: deployToGateways
-      summary: Deploy API to gateways
+      summary: APIIDA Deploy API to gateways
       description: >-
         Deploy a specific API version to one or more connected API gateways.
       tags:

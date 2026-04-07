@@ -37,7 +37,7 @@ paths:
   /gateways:
     get:
       operationId: listGateways
-      summary: List managed gateways
+      summary: APIIDA List managed gateways
       description: >-
         Retrieve a list of all registered and managed Layer7 API gateway
         instances.
@@ -65,7 +65,7 @@ paths:
           description: Unauthorized
     post:
       operationId: registerGateway
-      summary: Register a gateway
+      summary: APIIDA Register a gateway
       description: >-
         Register a new Layer7 API gateway instance for management by APIIDA.
       tags:
@@ -90,7 +90,7 @@ paths:
   /gateways/{gatewayId}:
     get:
       operationId: getGateway
-      summary: Get gateway details
+      summary: APIIDA Get gateway details
       description: >-
         Retrieve detailed information about a specific managed gateway.
       tags:
@@ -110,7 +110,7 @@ paths:
           description: Gateway not found
     put:
       operationId: updateGateway
-      summary: Update gateway configuration
+      summary: APIIDA Update gateway configuration
       description: >-
         Update the configuration of a registered gateway.
       tags:
@@ -136,7 +136,7 @@ paths:
           description: Gateway not found
     delete:
       operationId: removeGateway
-      summary: Remove a gateway
+      summary: APIIDA Remove a gateway
       description: >-
         Unregister and remove a gateway from management.
       tags:
@@ -153,7 +153,7 @@ paths:
   /gateways/{gatewayId}/apis:
     get:
       operationId: listGatewayApis
-      summary: List APIs on a gateway
+      summary: APIIDA List APIs on a gateway
       description: >-
         Retrieve a list of all APIs deployed on a specific gateway.
       tags:
@@ -183,7 +183,7 @@ paths:
   /deployments:
     get:
       operationId: listDeployments
-      summary: List deployments
+      summary: APIIDA List deployments
       description: >-
         Retrieve a list of API deployments across managed gateways.
       tags:
@@ -209,7 +209,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createDeployment
-      summary: Create a deployment
+      summary: APIIDA Create a deployment
       description: >-
         Initiate a new API deployment or migration to one or more gateways.
       tags:
@@ -234,7 +234,7 @@ paths:
   /deployments/{deploymentId}:
     get:
       operationId: getDeployment
-      summary: Get deployment status
+      summary: APIIDA Get deployment status
       description: >-
         Retrieve the status and details of a specific deployment.
       tags:
@@ -255,7 +255,7 @@ paths:
   /gateways/{gatewayId}/metrics:
     get:
       operationId: getGatewayMetrics
-      summary: Get gateway metrics
+      summary: APIIDA Get gateway metrics
       description: >-
         Retrieve performance and usage metrics for a specific gateway.
         Requires the APIIDA solution kit installed on the gateway.
@@ -289,7 +289,7 @@ paths:
   /alarms:
     get:
       operationId: listAlarms
-      summary: List alarm configurations
+      summary: APIIDA List alarm configurations
       description: >-
         Retrieve all configured alarm rules for monitored gateways.
       tags:
@@ -312,7 +312,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createAlarm
-      summary: Create an alarm
+      summary: APIIDA Create an alarm
       description: >-
         Create a new alarm rule for gateway monitoring.
       tags:
