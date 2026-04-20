@@ -1,0 +1,106 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "APIIDA"
+  description: "Vocabulary for APIIDA federated API management covering API Control Plane and API Gateway Manager resources."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: APIIDA API Control Plane
+      namespace: apiida-control-plane
+      version: v1
+      baseUrl: https://api.apiida.com/control-plane
+      status: active
+    - name: APIIDA API Gateway Manager
+      namespace: apiida-gateway-manager
+      version: v1
+      baseUrl: https://api.apiida.com/gateway-manager
+      status: active
+
+  resources:
+    - name: apis
+      apis: [apiida-control-plane]
+      actions: [list, create, validate, deploy]
+    - name: gateways
+      apis: [apiida-gateway-manager]
+      actions: [list, register, get-metrics]
+    - name: deployments
+      apis: [apiida-control-plane, apiida-gateway-manager]
+      actions: [list, create]
+
+  actions:
+    - name: list
+      http_method: GET
+      pattern: read
+    - name: validate
+      http_method: POST
+      pattern: read
+    - name: deploy
+      http_method: POST
+      pattern: write
+    - name: register
+      http_method: POST
+      pattern: write
+
+  schemas:
+    core:
+      - name: API
+        description: An API managed by APIIDA control plane.
+      - name: Gateway
+        description: A Broadcom Layer7 API gateway managed by APIIDA.
+      - name: Deployment
+        description: A deployment of an API to a gateway environment.
+
+  authentication:
+    schemes:
+      - name: bearerAuth
+        type: bearer
+
+capability:
+  workflows:
+    - name: Federated API Management
+      file: capabilities/federated-api-management.yaml
+      apis_combined: [APIIDA API Control Plane, APIIDA API Gateway Manager]
+      tool_count: 5
+      personas: [API Platform Engineer, Enterprise Architect]
+
+  personas:
+    - id: api-platform-engineer
+      name: API Platform Engineer
+      description: Engineer managing APIs across multiple gateways using APIIDA's federated control plane.
+      workflows: [Federated API Management]
+    - id: enterprise-architect
+      name: Enterprise Architect
+      description: Architect overseeing multi-gateway API strategy and governance.
+      workflows: [Federated API Management]
+
+  namespaces:
+    - name: apiida-control-plane
+      type: consumed
+      baseUri: https://api.apiida.com/control-plane
+    - name: apiida-gateway-manager
+      type: consumed
+      baseUri: https://api.apiida.com/gateway-manager
+    - name: apiida-federated-api
+      type: rest-exposed
+      port: 8080
+    - name: apiida-federated-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: APIIDA_API_KEY
+      description: APIIDA API key for authentication.
+      workflows: [Federated API Management]
+
+crossReference:
+  - resource: apis
+    operations: [listApis, createApiVersion, analyzeOpenProxySpec, deployToGateways]
+    workflows: [Federated API Management]
+    personas: [API Platform Engineer, Enterprise Architect]
+  - resource: gateways
+    operations: [listGateways, registerGateway, getGatewayMetrics]
+    workflows: [Federated API Management]
+    personas: [API Platform Engineer]

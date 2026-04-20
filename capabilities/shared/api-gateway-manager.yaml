@@ -1,0 +1,94 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "APIIDA API Gateway Manager"
+  description: "APIIDA API Gateway Manager for managing Broadcom Layer7 API gateways."
+  tags:
+    - APIIDA
+    - Gateway Management
+    - Layer7
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      APIIDA_API_KEY: APIIDA_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: apiida-gateway-manager
+      baseUri: https://api.apiida.com/gateway-manager
+      description: "APIIDA API Gateway Manager REST API."
+      authentication:
+        type: bearer
+        token: "{{APIIDA_API_KEY}}"
+      resources:
+        - name: gateways
+          path: /gateways
+          description: "Manage Layer7 gateways."
+          operations:
+            - name: list-gateways
+              method: GET
+              description: "List all managed gateways."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: register-gateway
+              method: POST
+              description: "Register a new gateway."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-gateway-metrics
+              method: GET
+              description: "Get monitoring metrics for a gateway."
+              inputParameters:
+                - name: gatewayId
+                  in: path
+                  type: string
+                  required: true
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: apiida-gw-rest
+      resources:
+        - path: /v1/gateways
+          operations:
+            - method: GET
+              name: list-gateways
+              description: "List gateways."
+              call: "apiida-gateway-manager.list-gateways"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      port: 9101
+      namespace: apiida-gw-mcp
+      transport: http
+      tools:
+        - name: list-gateways
+          description: "List all managed Broadcom Layer7 API gateways."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-gateway-manager.list-gateways"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-gateway-metrics
+          description: "Get monitoring metrics for a specific gateway."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-gateway-manager.get-gateway-metrics"
+          outputParameters:
+            - type: object
+              mapping: "$."

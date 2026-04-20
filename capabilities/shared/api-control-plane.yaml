@@ -1,0 +1,105 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "APIIDA API Control Plane"
+  description: "APIIDA API Control Plane for federated management of APIs across multiple gateways."
+  tags:
+    - APIIDA
+    - API Management
+    - Federated
+    - Gateway
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      APIIDA_API_KEY: APIIDA_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: apiida-control-plane
+      baseUri: https://api.apiida.com/control-plane
+      description: "APIIDA API Control Plane REST API."
+      authentication:
+        type: bearer
+        token: "{{APIIDA_API_KEY}}"
+      resources:
+        - name: apis
+          path: /apis
+          description: "Manage APIs across gateways."
+          operations:
+            - name: list-apis
+              method: GET
+              description: "List all APIs."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-api-version
+              method: POST
+              description: "Create a new API version."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: validate-spec
+              method: POST
+              description: "Validate an OpenAPI proxy specification."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: deploy-api
+              method: POST
+              description: "Deploy API to gateways."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: apiida-control-plane-rest
+      resources:
+        - path: /v1/apis
+          operations:
+            - method: GET
+              name: list-apis
+              description: "List APIs."
+              call: "apiida-control-plane.list-apis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+    - type: mcp
+      port: 9100
+      namespace: apiida-control-plane-mcp
+      transport: http
+      tools:
+        - name: list-apis
+          description: "List all APIs managed by APIIDA control plane."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-control-plane.list-apis"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-api-spec
+          description: "Validate an OpenAPI proxy specification."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-control-plane.validate-spec"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-api-to-gateways
+          description: "Deploy an API to one or more gateway environments."
+          hints: {readOnly: false, destructive: false, idempotent: false}
+          call: "apiida-control-plane.deploy-api"
+          outputParameters:
+            - type: object
+              mapping: "$."

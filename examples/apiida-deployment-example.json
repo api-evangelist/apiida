@@ -1,0 +1,7 @@
+{
+  "id": "dep-001",
+  "apiId": "api-001",
+  "gatewayId": "gw-001",
+  "environment": "production",
+  "status": "deployed"
+}

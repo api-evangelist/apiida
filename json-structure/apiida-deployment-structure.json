@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "apiida-deployment-structure.json",
+  "description": "An API deployment operation that provisions a specific API version to one or more managed gateways.",
+  "type": "object",
+  "required": [
+    "id",
+    "apiId",
+    "version",
+    "targetGateways",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique deployment identifier"
+    },
+    "apiId": {
+      "type": "string",
+      "description": "Identifier of the API being deployed"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the API being deployed"
+    },
+    "targetGateways": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of target gateway identifiers"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "failed",
+        "rolled_back"
+      ],
+      "description": "Current status of the deployment"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "Timestamp when the deployment was initiated"
+    },
+    "completedAt": {
+      "type": "datetime",
+      "description": "Timestamp when the deployment completed or failed"
+    }
+  },
+  "name": "APIIDA Deployment"
+}

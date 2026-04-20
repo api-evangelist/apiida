@@ -13,19 +13,19 @@ externalDocs:
   description: APIIDA Documentation
   url: https://apiida.atlassian.net
 servers:
-  - url: https://{tenant}.backend.apiida.io
-    description: APIIDA Backend
-    variables:
-      tenant:
-        description: Your APIIDA tenant identifier
-        default: example
+- url: https://{tenant}.backend.apiida.io
+  description: APIIDA Backend
+  variables:
+    tenant:
+      description: Your APIIDA tenant identifier
+      default: example
 tags:
-  - name: Deployments
-    description: Gateway deployment operations
-  - name: Versions
-    description: API version management
+- name: Deployments
+  description: Gateway deployment operations
+- name: Versions
+  description: API version management
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /apis/analyzeOpenProxySpec:
     post:
@@ -66,13 +66,13 @@ paths:
   /apis/{apiId}/versions:
     post:
       operationId: createApiVersion
-      summary: APIIDA Create API version
+      summary: APIIDA Create API Version
       description: >-
         Create a new version for an existing API in the control plane.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - $ref: '#/components/parameters/apiId'
+      - $ref: '#/components/parameters/apiId'
       requestBody:
         required: true
         content:
@@ -96,14 +96,14 @@ paths:
   /apis/{apiId}/versions/{version}/openProxySpec:
     put:
       operationId: uploadOpenProxySpec
-      summary: APIIDA Upload specification to API version
+      summary: APIIDA Upload Specification to API Version
       description: >-
         Upload an Open Proxy Specification to a specific API version.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - $ref: '#/components/parameters/apiId'
-        - $ref: '#/components/parameters/version'
+      - $ref: '#/components/parameters/apiId'
+      - $ref: '#/components/parameters/version'
       requestBody:
         required: true
         content:
@@ -124,14 +124,14 @@ paths:
   /apis/{apiId}/versions/{version}/importIntoGateways:
     post:
       operationId: deployToGateways
-      summary: APIIDA Deploy API to gateways
+      summary: APIIDA Deploy API to Gateways
       description: >-
         Deploy a specific API version to one or more connected API gateways.
       tags:
-        - Deployments
+      - Deployments
       parameters:
-        - $ref: '#/components/parameters/apiId'
-        - $ref: '#/components/parameters/version'
+      - $ref: '#/components/parameters/apiId'
+      - $ref: '#/components/parameters/version'
       requestBody:
         required: true
         content:

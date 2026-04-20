@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "apiida-api-structure.json",
+  "description": "An API managed within the APIIDA API Control Plane, representing a logical API resource that can be versioned and deployed to gateways.",
+  "type": "object",
+  "required": [
+    "id",
+    "name"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the API"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the API"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the API"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "deprecated",
+        "retired"
+      ],
+      "description": "Current lifecycle status of the API"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for categorizing the API"
+    },
+    "currentVersion": {
+      "type": "string",
+      "description": "The current active version identifier"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "Timestamp when the API was created"
+    },
+    "updatedAt": {
+      "type": "datetime",
+      "description": "Timestamp when the API was last updated"
+    }
+  },
+  "name": "APIIDA API"
+}

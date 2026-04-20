@@ -1,0 +1,7 @@
+{
+  "id": "gw-001",
+  "name": "Production Gateway",
+  "type": "kong",
+  "url": "https://gateway.example.com",
+  "status": "online"
+}

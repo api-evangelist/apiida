@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "apiida-gateway-structure.json",
+  "description": "A managed API gateway instance registered with APIIDA, typically a Broadcom Layer7 gateway used for API deployment and monitoring.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "host",
+    "port"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique gateway identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the gateway"
+    },
+    "host": {
+      "type": "string",
+      "description": "Hostname or IP address of the gateway"
+    },
+    "port": {
+      "type": "int32",
+      "description": "Gateway management port"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "connected",
+        "disconnected",
+        "error"
+      ],
+      "description": "Current connection status of the gateway"
+    },
+    "type": {
+      "type": "string",
+      "description": "Gateway platform type (e.g. Layer7, Kong, AWS)"
+    },
+    "version": {
+      "type": "string",
+      "description": "Gateway software version"
+    },
+    "apiCount": {
+      "type": "int32",
+      "description": "Number of APIs currently deployed on this gateway"
+    },
+    "createdAt": {
+      "type": "datetime",
+      "description": "Timestamp when the gateway was registered"
+    },
+    "updatedAt": {
+      "type": "datetime",
+      "description": "Timestamp when the gateway record was last updated"
+    }
+  },
+  "name": "APIIDA Gateway"
+}

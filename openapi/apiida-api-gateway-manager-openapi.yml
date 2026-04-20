@@ -14,36 +14,36 @@ externalDocs:
   description: APIIDA API Gateway Manager Documentation
   url: https://apiida.atlassian.net/wiki/spaces/AAGM
 servers:
-  - url: https://{tenant}.backend.apiida.io
-    description: APIIDA Backend
-    variables:
-      tenant:
-        description: Your APIIDA tenant identifier
-        default: example
+- url: https://{tenant}.backend.apiida.io
+  description: APIIDA Backend
+  variables:
+    tenant:
+      description: Your APIIDA tenant identifier
+      default: example
 tags:
-  - name: Alarms
-    description: Alarm configuration and management
-  - name: Deployments
-    description: API deployment and migration operations
-  - name: Gateways
-    description: Gateway registration and management operations
-  - name: Monitoring
-    description: Metrics and monitoring operations
+- name: Alarms
+  description: Alarm configuration and management
+- name: Deployments
+  description: API deployment and migration operations
+- name: Gateways
+  description: Gateway registration and management operations
+- name: Monitoring
+  description: Metrics and monitoring operations
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /gateways:
     get:
       operationId: listGateways
-      summary: APIIDA List managed gateways
+      summary: APIIDA List Managed Gateways
       description: >-
         Retrieve a list of all registered and managed Layer7 API gateway
         instances.
       tags:
-        - Gateways
+      - Gateways
       parameters:
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
       responses:
         '200':
           description: List of managed gateways
@@ -63,11 +63,11 @@ paths:
           description: Unauthorized
     post:
       operationId: registerGateway
-      summary: APIIDA Register a gateway
+      summary: APIIDA Register a Gateway
       description: >-
         Register a new Layer7 API gateway instance for management by APIIDA.
       tags:
-        - Gateways
+      - Gateways
       requestBody:
         required: true
         content:
@@ -88,13 +88,13 @@ paths:
   /gateways/{gatewayId}:
     get:
       operationId: getGateway
-      summary: APIIDA Get gateway details
+      summary: APIIDA Get Gateway Details
       description: >-
         Retrieve detailed information about a specific managed gateway.
       tags:
-        - Gateways
+      - Gateways
       parameters:
-        - $ref: '#/components/parameters/gatewayId'
+      - $ref: '#/components/parameters/gatewayId'
       responses:
         '200':
           description: Gateway details
@@ -108,13 +108,13 @@ paths:
           description: Gateway not found
     put:
       operationId: updateGateway
-      summary: APIIDA Update gateway configuration
+      summary: APIIDA Update Gateway Configuration
       description: >-
         Update the configuration of a registered gateway.
       tags:
-        - Gateways
+      - Gateways
       parameters:
-        - $ref: '#/components/parameters/gatewayId'
+      - $ref: '#/components/parameters/gatewayId'
       requestBody:
         required: true
         content:
@@ -134,13 +134,13 @@ paths:
           description: Gateway not found
     delete:
       operationId: removeGateway
-      summary: APIIDA Remove a gateway
+      summary: APIIDA Remove a Gateway
       description: >-
         Unregister and remove a gateway from management.
       tags:
-        - Gateways
+      - Gateways
       parameters:
-        - $ref: '#/components/parameters/gatewayId'
+      - $ref: '#/components/parameters/gatewayId'
       responses:
         '204':
           description: Gateway removed successfully
@@ -151,14 +151,14 @@ paths:
   /gateways/{gatewayId}/apis:
     get:
       operationId: listGatewayApis
-      summary: APIIDA List APIs on a gateway
+      summary: APIIDA List APIs on a Gateway
       description: >-
         Retrieve a list of all APIs deployed on a specific gateway.
       tags: []
       parameters:
-        - $ref: '#/components/parameters/gatewayId'
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/gatewayId'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
       responses:
         '200':
           description: List of APIs on the gateway
@@ -180,14 +180,14 @@ paths:
   /deployments:
     get:
       operationId: listDeployments
-      summary: APIIDA List deployments
+      summary: APIIDA List Deployments
       description: >-
         Retrieve a list of API deployments across managed gateways.
       tags:
-        - Deployments
+      - Deployments
       parameters:
-        - $ref: '#/components/parameters/offset'
-        - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
       responses:
         '200':
           description: List of deployments
@@ -206,11 +206,11 @@ paths:
           description: Unauthorized
     post:
       operationId: createDeployment
-      summary: APIIDA Create a deployment
+      summary: APIIDA Create a Deployment
       description: >-
         Initiate a new API deployment or migration to one or more gateways.
       tags:
-        - Deployments
+      - Deployments
       requestBody:
         required: true
         content:
@@ -231,13 +231,13 @@ paths:
   /deployments/{deploymentId}:
     get:
       operationId: getDeployment
-      summary: APIIDA Get deployment status
+      summary: APIIDA Get Deployment Status
       description: >-
         Retrieve the status and details of a specific deployment.
       tags:
-        - Deployments
+      - Deployments
       parameters:
-        - $ref: '#/components/parameters/deploymentId'
+      - $ref: '#/components/parameters/deploymentId'
       responses:
         '200':
           description: Deployment details
@@ -252,26 +252,26 @@ paths:
   /gateways/{gatewayId}/metrics:
     get:
       operationId: getGatewayMetrics
-      summary: APIIDA Get gateway metrics
+      summary: APIIDA Get Gateway Metrics
       description: >-
         Retrieve performance and usage metrics for a specific gateway.
         Requires the APIIDA solution kit installed on the gateway.
       tags:
-        - Monitoring
+      - Monitoring
       parameters:
-        - $ref: '#/components/parameters/gatewayId'
-        - name: from
-          in: query
-          schema:
-            type: string
-            format: date-time
-          description: Start of the time range
-        - name: to
-          in: query
-          schema:
-            type: string
-            format: date-time
-          description: End of the time range
+      - $ref: '#/components/parameters/gatewayId'
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Start of the time range
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: End of the time range
       responses:
         '200':
           description: Gateway metrics
@@ -286,11 +286,11 @@ paths:
   /alarms:
     get:
       operationId: listAlarms
-      summary: APIIDA List alarm configurations
+      summary: APIIDA List Alarm Configurations
       description: >-
         Retrieve all configured alarm rules for monitored gateways.
       tags:
-        - Alarms
+      - Alarms
       responses:
         '200':
           description: List of alarm configurations
@@ -309,11 +309,11 @@ paths:
           description: Unauthorized
     post:
       operationId: createAlarm
-      summary: APIIDA Create an alarm
+      summary: APIIDA Create an Alarm
       description: >-
         Create a new alarm rule for gateway monitoring.
       tags:
-        - Alarms
+      - Alarms
       requestBody:
         required: true
         content:
@@ -385,9 +385,9 @@ components:
         status:
           type: string
           enum:
-            - connected
-            - disconnected
-            - error
+          - connected
+          - disconnected
+          - error
           description: Current connection status
         type:
           type: string
@@ -407,9 +407,9 @@ components:
     GatewayRegistration:
       type: object
       required:
-        - name
-        - host
-        - port
+      - name
+      - host
+      - port
       properties:
         name:
           type: string
@@ -446,9 +446,9 @@ components:
         status:
           type: string
           enum:
-            - active
-            - disabled
-            - deprecated
+          - active
+          - disabled
+          - deprecated
           description: API status on the gateway
         lastDeployed:
           type: string
@@ -473,11 +473,11 @@ components:
         status:
           type: string
           enum:
-            - pending
-            - in_progress
-            - completed
-            - failed
-            - rolled_back
+          - pending
+          - in_progress
+          - completed
+          - failed
+          - rolled_back
           description: Current deployment status
         createdAt:
           type: string
@@ -488,9 +488,9 @@ components:
     DeploymentRequest:
       type: object
       required:
-        - apiId
-        - version
-        - targetGateways
+      - apiId
+      - version
+      - targetGateways
       properties:
         apiId:
           type: string
@@ -552,9 +552,9 @@ components:
         condition:
           type: string
           enum:
-            - above
-            - below
-            - equals
+          - above
+          - below
+          - equals
           description: Threshold comparison condition
         enabled:
           type: boolean
@@ -564,11 +564,11 @@ components:
     AlarmRequest:
       type: object
       required:
-        - name
-        - gatewayId
-        - metric
-        - threshold
-        - condition
+      - name
+      - gatewayId
+      - metric
+      - threshold
+      - condition
       properties:
         name:
           type: string
@@ -581,9 +581,9 @@ components:
         condition:
           type: string
           enum:
-            - above
-            - below
-            - equals
+          - above
+          - below
+          - equals
         enabled:
           type: boolean
           default: true

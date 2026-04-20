@@ -1,0 +1,92 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "APIIDA Federated API Management"
+  description: "Unified workflow for federated API management across multiple API gateways using APIIDA - validating specs, deploying APIs, monitoring gateways, and managing API lifecycle from a central control plane."
+  tags:
+    - APIIDA
+    - API Management
+    - Federated
+    - Gateway
+    - Enterprise
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      APIIDA_API_KEY: APIIDA_API_KEY
+
+capability:
+  consumes:
+    - import: apiida-control-plane
+      location: ./shared/api-control-plane.yaml
+    - import: apiida-gateway-manager
+      location: ./shared/api-gateway-manager.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: apiida-federated-api
+      description: "Unified REST API for APIIDA federated API management."
+      resources:
+        - path: /v1/apis
+          operations:
+            - method: GET
+              name: list-apis
+              description: "List all managed APIs."
+              call: "apiida-control-plane.list-apis"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/gateways
+          operations:
+            - method: GET
+              name: list-gateways
+              description: "List all managed gateways."
+              call: "apiida-gateway-manager.list-gateways"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: apiida-federated-mcp
+      transport: http
+      description: "MCP server for AI-assisted APIIDA federated API management."
+      tools:
+        - name: list-managed-apis
+          description: "List all APIs managed across the APIIDA federated control plane."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-control-plane.list-apis"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-api-specification
+          description: "Validate an OpenAPI proxy specification before deployment."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-control-plane.validate-spec"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-api-to-gateways
+          description: "Deploy a validated API to one or more gateway environments."
+          hints: {readOnly: false, destructive: false, idempotent: false}
+          call: "apiida-control-plane.deploy-api"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-managed-gateways
+          description: "List all Broadcom Layer7 gateways registered in the gateway manager."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-gateway-manager.list-gateways"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-gateway-metrics
+          description: "Get monitoring and performance metrics for a specific gateway."
+          hints: {readOnly: true, destructive: false, idempotent: true}
+          call: "apiida-gateway-manager.get-gateway-metrics"
+          outputParameters:
+            - type: object
+              mapping: "$."
