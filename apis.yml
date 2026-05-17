@@ -44,7 +44,7 @@ apis:
         url: json-schema/apiida-api.json
       - type: JSONSchema
         url: json-schema/apiida-deployment.json
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/apiida-context.jsonld
   - aid: apiida:api-gateway-manager
     name: APIIDA API Gateway Manager
@@ -71,7 +71,7 @@ apis:
         url: json-schema/apiida-gateway.json
       - type: JSONSchema
         url: json-schema/apiida-deployment.json
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/apiida-context.jsonld
 common:
   - type: Website
