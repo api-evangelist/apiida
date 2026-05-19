@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: APIIDA API Control Plane — Deployments
+  description: 'APIIDA API Control Plane — Deployments. 1 operations. Lead operation: APIIDA Deploy API to Gateways. Self-contained
+    Naftiko capability covering one Apiida business surface.'
+  tags:
+  - Apiida
+  - Deployments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APIIDA_API_KEY: APIIDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-control-plane-deployments
+    baseUri: https://{tenant}.backend.apiida.io
+    description: APIIDA API Control Plane — Deployments business capability. Self-contained, no shared references.
+    resources:
+    - name: apis-apiId-versions-version-importIntoGateways
+      path: /apis/{apiId}/versions/{version}/importIntoGateways
+      operations:
+      - name: deploytogateways
+        method: POST
+        description: APIIDA Deploy API to Gateways
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.APIIDA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-control-plane-deployments-rest
+    port: 8080
+    description: REST adapter for APIIDA API Control Plane — Deployments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/apis/{apiid}/versions/{version}/importintogateways
+      name: apis-apiid-versions-version-importintogateways
+      description: REST surface for apis-apiId-versions-version-importIntoGateways.
+      operations:
+      - method: POST
+        name: deploytogateways
+        description: APIIDA Deploy API to Gateways
+        call: api-control-plane-deployments.deploytogateways
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-control-plane-deployments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for APIIDA API Control Plane — Deployments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: apiida-deploy-api-gateways
+      description: APIIDA Deploy API to Gateways
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-control-plane-deployments.deploytogateways
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

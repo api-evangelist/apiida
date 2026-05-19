@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: APIIDA API Gateway Manager — Deployments
+  description: 'APIIDA API Gateway Manager — Deployments. 3 operations. Lead operation: APIIDA List Deployments. Self-contained
+    Naftiko capability covering one Apiida business surface.'
+  tags:
+  - Apiida
+  - Deployments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APIIDA_API_KEY: APIIDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-gateway-manager-deployments
+    baseUri: https://{tenant}.backend.apiida.io
+    description: APIIDA API Gateway Manager — Deployments business capability. Self-contained, no shared references.
+    resources:
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: listdeployments
+        method: GET
+        description: APIIDA List Deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdeployment
+        method: POST
+        description: APIIDA Create a Deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: deployments-deploymentId
+      path: /deployments/{deploymentId}
+      operations:
+      - name: getdeployment
+        method: GET
+        description: APIIDA Get Deployment Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.APIIDA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-gateway-manager-deployments-rest
+    port: 8080
+    description: REST adapter for APIIDA API Gateway Manager — Deployments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/deployments
+      name: deployments
+      description: REST surface for deployments.
+      operations:
+      - method: GET
+        name: listdeployments
+        description: APIIDA List Deployments
+        call: api-gateway-manager-deployments.listdeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdeployment
+        description: APIIDA Create a Deployment
+        call: api-gateway-manager-deployments.createdeployment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments/{deploymentid}
+      name: deployments-deploymentid
+      description: REST surface for deployments-deploymentId.
+      operations:
+      - method: GET
+        name: getdeployment
+        description: APIIDA Get Deployment Status
+        call: api-gateway-manager-deployments.getdeployment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-gateway-manager-deployments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for APIIDA API Gateway Manager — Deployments. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apiida-list-deployments
+      description: APIIDA List Deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-gateway-manager-deployments.listdeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apiida-create-deployment
+      description: APIIDA Create a Deployment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-gateway-manager-deployments.createdeployment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: apiida-get-deployment-status
+      description: APIIDA Get Deployment Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-gateway-manager-deployments.getdeployment
+      outputParameters:
+      - type: object
+        mapping: $.
