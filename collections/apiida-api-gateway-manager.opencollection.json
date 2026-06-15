@@ -1,0 +1,304 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "APIIDA API Gateway Manager",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gateways",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA List Managed Gateways",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/gateways",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all registered and managed Layer7 API gateway instances."
+        },
+        {
+          "info": {
+            "name": "APIIDA Register a Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/gateways",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new Layer7 API gateway instance for management by APIIDA."
+        },
+        {
+          "info": {
+            "name": "APIIDA Get Gateway Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/gateways/:gatewayId",
+            "params": [
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "path",
+                "description": "The gateway identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific managed gateway."
+        },
+        {
+          "info": {
+            "name": "APIIDA Update Gateway Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.backend.apiida.io/gateways/:gatewayId",
+            "params": [
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "path",
+                "description": "The gateway identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the configuration of a registered gateway."
+        },
+        {
+          "info": {
+            "name": "APIIDA Remove a Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.backend.apiida.io/gateways/:gatewayId",
+            "params": [
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "path",
+                "description": "The gateway identifier"
+              }
+            ]
+          },
+          "docs": "Unregister and remove a gateway from management."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA List APIs on a Gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/gateways/:gatewayId/apis",
+            "params": [
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "path",
+                "description": "The gateway identifier"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all APIs deployed on a specific gateway."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA List Deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/deployments",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of API deployments across managed gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Create a Deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/deployments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a new API deployment or migration to one or more gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Get Deployment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "The deployment identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and details of a specific deployment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitoring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA Get Gateway Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/gateways/:gatewayId/metrics",
+            "params": [
+              {
+                "name": "gatewayId",
+                "value": "",
+                "type": "path",
+                "description": "The gateway identifier"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range"
+              }
+            ]
+          },
+          "docs": "Retrieve performance and usage metrics for a specific gateway. Requires the APIIDA solution kit installed on the gateway."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Alarms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA List Alarm Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/alarms"
+          },
+          "docs": "Retrieve all configured alarm rules for monitored gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Create an Alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/alarms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new alarm rule for gateway monitoring."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
