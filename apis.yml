@@ -69,6 +69,10 @@ apis:
       - type: JSONLD
         url: json-ld/apiida-context.jsonld
 common:
+  - type: DomainSecurity
+    url: security/apiida-domain-security.yml
+  - type: Authentication
+    url: authentication/apiida-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/apiida
   - type: Website
