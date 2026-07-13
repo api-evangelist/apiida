@@ -1,68 +1,155 @@
-extends: spectral:oas
+# apiida — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 2/2 servers on apiida.io
+#   - path-params-casing: camel @ 82% (n=11)
+#   - query-params-casing: snake @ 100% (n=8)
+#   - operationid-casing: camel @ 100% (n=16)
+#   - schema-names-casing: pascal @ 100% (n=8)
+#   - schema-properties-casing: snake @ 66% (n=50)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - operation-documents-401: 100% adherence
+#   - pagination params observed: ['limit', 'offset']
+#   - merge: kept 7 existing, added 9 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, security-schemes-defined, operation-documents-401, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   info-title-prefix:
     description: API title must start with 'APIIDA'.
     severity: warn
-    given: '$.info'
+    given: $.info
     then:
       field: title
       function: pattern
       functionOptions:
-        match: '^APIIDA'
-
+        match: ^APIIDA
   info-description-required:
     description: API must have a description.
     severity: error
-    given: '$.info'
+    given: $.info
     then:
       field: description
       function: truthy
-
   servers-https:
     description: All server URLs must use HTTPS.
     severity: error
-    given: '$.servers[*]'
+    given: $.servers[*]
     then:
       field: url
       function: pattern
       functionOptions:
-        match: '^https://'
-
+        match: ^https://
   operation-summary-prefix:
     description: Operation summaries must start with 'APIIDA'.
     severity: warn
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: summary
       function: pattern
       functionOptions:
-        match: '^APIIDA'
-
+        match: ^APIIDA
   operation-id-required:
     description: Every operation must have an operationId.
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
-
   operation-tags-required:
     description: Every operation must have tags.
     severity: warn
-    given: '$.paths[*][get,post,put,patch,delete]'
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
-
   response-success-required:
     description: Every operation must have a 2xx response.
     severity: error
-    given: '$.paths[*][get,post,put,patch,delete].responses'
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
+  servers-expected-domain:
+    description: Server URLs should be on the apiida.io domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: apiida\.io
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  operation-documents-401:
+    description: Operations should document a 401 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '401'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
