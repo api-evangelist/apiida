@@ -69,6 +69,8 @@ apis:
       - type: JSONLD
         url: json-ld/apiida-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/apiida-agentic-access.yml
   - type: DomainSecurity
     url: security/apiida-domain-security.yml
   - type: Authentication
