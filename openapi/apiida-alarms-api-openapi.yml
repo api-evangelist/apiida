@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: APIIDA API Control Plane Alarms API
+  description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
+  version: '1.0'
+  contact:
+    name: APIIDA Support
+    url: https://www.apiida.com
+servers:
+- url: https://{tenant}.backend.apiida.io
+  description: APIIDA Backend
+  variables:
+    tenant:
+      description: Your APIIDA tenant identifier
+      default: example
+security:
+- bearerAuth: []
+tags:
+- name: Alarms
+  description: Alarm configuration and management
+paths:
+  /alarms:
+    get:
+      operationId: listAlarms
+      summary: APIIDA List Alarm Configurations
+      description: Retrieve all configured alarm rules for monitored gateways.
+      tags:
+      - Alarms
+      responses:
+        '200':
+          description: List of alarm configurations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Alarm'
+                  total:
+                    type: integer
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAlarm
+      summary: APIIDA Create an Alarm
+      description: Create a new alarm rule for gateway monitoring.
+      tags:
+      - Alarms
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlarmRequest'
+      responses:
+        '201':
+          description: Alarm created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alarm'
+        '400':
+          description: Invalid alarm configuration
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    AlarmRequest:
+      type: object
+      required:
+      - name
+      - gatewayId
+      - metric
+      - threshold
+      - condition
+      properties:
+        name:
+          type: string
+        gatewayId:
+          type: string
+        metric:
+          type: string
+        threshold:
+          type: number
+        condition:
+          type: string
+          enum:
+          - above
+          - below
+          - equals
+        enabled:
+          type: boolean
+          default: true
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Alarm identifier
+        name:
+          type: string
+          description: Alarm name
+        gatewayId:
+          type: string
+          description: Target gateway identifier
+        metric:
+          type: string
+          description: Metric to monitor
+        threshold:
+          type: number
+          description: Threshold value to trigger alarm
+        condition:
+          type: string
+          enum:
+          - above
+          - below
+          - equals
+          description: Threshold comparison condition
+        enabled:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+externalDocs:
+  description: APIIDA Documentation
+  url: https://apiida.atlassian.net

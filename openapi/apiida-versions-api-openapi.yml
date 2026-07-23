@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: APIIDA API Control Plane Alarms Versions API
+  description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
+  version: '1.0'
+  contact:
+    name: APIIDA Support
+    url: https://www.apiida.com
+servers:
+- url: https://{tenant}.backend.apiida.io
+  description: APIIDA Backend
+  variables:
+    tenant:
+      description: Your APIIDA tenant identifier
+      default: example
+security:
+- bearerAuth: []
+tags:
+- name: Versions
+  description: API version management
+paths:
+  /apis/{apiId}/versions:
+    post:
+      operationId: createApiVersion
+      summary: APIIDA Create API Version
+      description: Create a new version for an existing API in the control plane.
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/apiId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: Version identifier
+                description:
+                  type: string
+                  description: Version description
+      responses:
+        '201':
+          description: API version created successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: API not found
+  /apis/{apiId}/versions/{version}/openProxySpec:
+    put:
+      operationId: uploadOpenProxySpec
+      summary: APIIDA Upload Specification to API Version
+      description: Upload an Open Proxy Specification to a specific API version.
+      tags:
+      - Versions
+      parameters:
+      - $ref: '#/components/parameters/apiId'
+      - $ref: '#/components/parameters/version'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spec:
+                  type: string
+                  description: The Open Proxy Specification content
+      responses:
+        '200':
+          description: Specification uploaded successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: API or version not found
+components:
+  parameters:
+    apiId:
+      name: apiId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The API identifier
+    version:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The API version identifier
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+externalDocs:
+  description: APIIDA Documentation
+  url: https://apiida.atlassian.net

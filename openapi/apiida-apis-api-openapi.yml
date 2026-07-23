@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: APIIDA API Control Plane Alarms Apis API
+  description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
+  version: '1.0'
+  contact:
+    name: APIIDA Support
+    url: https://www.apiida.com
+servers:
+- url: https://{tenant}.backend.apiida.io
+  description: APIIDA Backend
+  variables:
+    tenant:
+      description: Your APIIDA tenant identifier
+      default: example
+security:
+- bearerAuth: []
+tags:
+- name: Apis
+paths:
+  /apis/analyzeOpenProxySpec:
+    post:
+      operationId: analyzeOpenProxySpec
+      summary: APIIDA Validate Open Proxy Specification
+      description: Validate an Open Proxy Specification file to check for errors and compatibility before creating API versions.
+      tags:
+      - Apis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spec:
+                  type: string
+                  description: The Open Proxy Specification content to validate
+      responses:
+        '200':
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Whether the specification is valid
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    description: List of validation errors if any
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+externalDocs:
+  description: APIIDA Documentation
+  url: https://apiida.atlassian.net
