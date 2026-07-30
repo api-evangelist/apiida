@@ -6,7 +6,20 @@ description: >-
   Gateway Manager automates API operations for Broadcom Layer7 environments with comprehensive deployment, migration,
   monitoring, and alarming capabilities.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/apiida.png
 tags:
   - API Gateway
   - API Management
@@ -18,56 +31,150 @@ created: '2025-01-08'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: apiida:api-control-plane
-    name: APIIDA API Control Plane
-    description: >-
-      REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways.
-      Supports validation of proxy specifications, API version management, and deployment to gateways from a central
-      federated control plane.
-    humanURL: https://apiida.com/product/apiida-api-control-plane/
-    baseURL: https://api.apiida.com
-    tags:
-      - API Lifecycle
-      - API Management
-      - Federated Control Plane
-      - Governance
-    properties:
-      - type: Documentation
-        url: https://apiida.com/product/apiida-api-control-plane/
-      - type: OpenAPI
-        url: openapi/apiida-api-control-plane-openapi.yml
-      - type: JSONSchema
-        url: json-schema/apiida-api.json
-      - type: JSONSchema
-        url: json-schema/apiida-deployment.json
-      - type: JSONLD
-        url: json-ld/apiida-context.jsonld
-  - aid: apiida:api-gateway-manager
-    name: APIIDA API Gateway Manager
-    description: >-
-      REST API for the APIIDA API Gateway Manager, enabling programmatic management of Broadcom Layer7 API gateways.
-      Supports gateway registration, API deployment and migration, monitoring and metrics collection, and alarm
-      configuration across managed gateway instances.
-    humanURL: https://apiida.com/product/apiida-api-gateway-manager/
-    baseURL: https://api.apiida.com
-    tags:
-      - API Deployments
-      - API Gateway
-      - Layer7
-      - Monitoring
-    properties:
-      - type: Documentation
-        url: https://apiida.com/product/apiida-api-gateway-manager/
-      - type: Documentation
-        url: https://apiida.atlassian.net/wiki/spaces/AAGM
-      - type: OpenAPI
-        url: openapi/apiida-api-gateway-manager-openapi.yml
-      - type: JSONSchema
-        url: json-schema/apiida-gateway.json
-      - type: JSONSchema
-        url: json-schema/apiida-deployment.json
-      - type: JSONLD
-        url: json-ld/apiida-context.jsonld
+- aid: apiida:apiida-alarms-api
+  name: APIIDA Alarms API
+  description: Alarm configuration and management
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Alarms
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-alarms-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-apis-api
+  name: APIIDA Apis API
+  description: The Apis API from APIIDA — 1 operation(s) for apis.
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Apis
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-apis-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-deployments-api
+  name: APIIDA Deployments API
+  description: Gateway deployment operations
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-gateways-api
+  name: APIIDA Gateways API
+  description: Gateway registration and management operations
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Gateways
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-gateways-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-monitoring-api
+  name: APIIDA Monitoring API
+  description: Metrics and monitoring operations
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Monitoring
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-monitoring-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-versions-api
+  name: APIIDA Versions API
+  description: API version management
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-versions-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
 common:
   - type: AgenticAccess
     url: agentic-access/apiida-agentic-access.yml
