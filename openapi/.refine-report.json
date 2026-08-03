@@ -1,0 +1,24 @@
+{
+  "provider": "apiida",
+  "sources": [
+    "apiida-alarms-api-openapi.yml",
+    "apiida-apis-api-openapi.yml",
+    "apiida-deployments-api-openapi.yml",
+    "apiida-gateways-api-openapi.yml",
+    "apiida-monitoring-api-openapi.yml",
+    "apiida-versions-api-openapi.yml"
+  ],
+  "outputs": [
+    "apiida-alarms-api-openapi.yml",
+    "apiida-apis-api-openapi.yml",
+    "apiida-deployments-api-openapi.yml",
+    "apiida-gateways-api-openapi.yml",
+    "apiida-monitoring-api-openapi.yml",
+    "apiida-versions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
