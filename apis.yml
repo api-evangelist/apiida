@@ -176,6 +176,9 @@ apis:
   - type: JSONSchema
     url: json-schema/apiida-gateway.json
 common:
+  - type: ParentCompany
+    name: Boomi
+    url: https://boomi.com/
   - type: AgenticAccess
     url: agentic-access/apiida-agentic-access.yml
   - type: DomainSecurity
