@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "APIIDA API Control Plane Alarms Apis API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA Validate Open Proxy Specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/apis/analyzeOpenProxySpec",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate an Open Proxy Specification file to check for errors and compatibility before creating API versions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

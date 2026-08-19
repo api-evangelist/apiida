@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "APIIDA API Control Plane Alarms API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alarms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA List Alarm Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/alarms"
+          },
+          "docs": "Retrieve all configured alarm rules for monitored gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Create an Alarm",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/alarms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new alarm rule for gateway monitoring."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

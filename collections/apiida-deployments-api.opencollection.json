@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "APIIDA API Control Plane Alarms Deployments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "APIIDA Deploy API to Gateways",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/apis/:apiId/versions/:version/importIntoGateways",
+            "params": [
+              {
+                "name": "apiId",
+                "value": "",
+                "type": "path",
+                "description": "The API identifier"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The API version identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deploy a specific API version to one or more connected API gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA List Deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/deployments",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of API deployments across managed gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Create a Deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.backend.apiida.io/deployments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a new API deployment or migration to one or more gateways."
+        },
+        {
+          "info": {
+            "name": "APIIDA Get Deployment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.backend.apiida.io/deployments/:deploymentId",
+            "params": [
+              {
+                "name": "deploymentId",
+                "value": "",
+                "type": "path",
+                "description": "The deployment identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and details of a specific deployment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
