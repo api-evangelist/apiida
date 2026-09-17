@@ -74,31 +74,6 @@ apis:
     url: https://apiida.atlassian.net/wiki/spaces/AAGM
   - type: JSONSchema
     url: json-schema/apiida-gateway.json
-- aid: apiida:apiida-apis-api
-  name: APIIDA Apis API
-  description: The Apis API from APIIDA — 1 operation(s) for apis.
-  humanURL: https://apiida.com/product/apiida-api-control-plane/
-  baseURL: https://api.apiida.com
-  tags: []
-  tags_raw:
-  - Apis
-  properties:
-  - type: OpenAPI
-    url: openapi/apiida-apis-api-openapi.yml
-  - type: Documentation
-    url: https://apiida.com/product/apiida-api-control-plane/
-  - type: JSONSchema
-    url: json-schema/apiida-api.json
-  - type: JSONSchema
-    url: json-schema/apiida-deployment.json
-  - type: JSONLD
-    url: json-ld/apiida-context.jsonld
-  - type: Documentation
-    url: https://apiida.com/product/apiida-api-gateway-manager/
-  - type: Documentation
-    url: https://apiida.atlassian.net/wiki/spaces/AAGM
-  - type: JSONSchema
-    url: json-schema/apiida-gateway.json
 - aid: apiida:apiida-deployments-api
   name: APIIDA Deployments API
   description: Gateway deployment operations
@@ -183,6 +158,30 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/apiida-versions-api-openapi.yml
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-control-plane/
+  - type: JSONSchema
+    url: json-schema/apiida-api.json
+  - type: JSONSchema
+    url: json-schema/apiida-deployment.json
+  - type: JSONLD
+    url: json-ld/apiida-context.jsonld
+  - type: Documentation
+    url: https://apiida.com/product/apiida-api-gateway-manager/
+  - type: Documentation
+    url: https://apiida.atlassian.net/wiki/spaces/AAGM
+  - type: JSONSchema
+    url: json-schema/apiida-gateway.json
+- aid: apiida:apiida-apis-api
+  name: APIIDA APIS API
+  description: The Apis API from APIIDA — 1 operation(s) for apis.
+  humanURL: https://apiida.com/product/apiida-api-control-plane/
+  baseURL: https://api.apiida.com
+  tags:
+  - Apis
+  properties:
+  - type: OpenAPI
+    url: openapi/apiida-apis-api-openapi.yml
   - type: Documentation
     url: https://apiida.com/product/apiida-api-control-plane/
   - type: JSONSchema
