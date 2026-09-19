@@ -177,7 +177,8 @@ apis:
   description: The Apis API from APIIDA — 1 operation(s) for apis.
   humanURL: https://apiida.com/product/apiida-api-control-plane/
   baseURL: https://api.apiida.com
-  tags:
+  tags: []
+  tags_raw:
   - Apis
   properties:
   - type: OpenAPI
