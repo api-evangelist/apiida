@@ -254,3 +254,6 @@ common:
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+x-parent: boomi
+x-relationship: acquisition
+x-acquired: 2024
