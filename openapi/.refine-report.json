@@ -1,24 +1,39 @@
 {
   "provider": "apiida",
   "sources": [
-    "apiida-alarms-api-openapi.yml",
-    "apiida-apis-api-openapi.yml",
-    "apiida-deployments-api-openapi.yml",
-    "apiida-gateways-api-openapi.yml",
-    "apiida-monitoring-api-openapi.yml",
-    "apiida-versions-api-openapi.yml"
+    "_original/apiida-api-control-plane-openapi.yml",
+    "_original/apiida-api-gateway-manager-openapi.yml"
   ],
   "outputs": [
-    "apiida-alarms-api-openapi.yml",
     "apiida-apis-api-openapi.yml",
     "apiida-deployments-api-openapi.yml",
+    "apiida-versions-api-openapi.yml",
+    "apiida-alarms-api-openapi.yml",
     "apiida-gateways-api-openapi.yml",
-    "apiida-monitoring-api-openapi.yml",
-    "apiida-versions-api-openapi.yml"
+    "apiida-monitoring-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apiida-api-control-plane-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apiida-api-control-plane-openapi.yml: tagged paths POST /apis/analyzeOpenProxySpec -> Apis",
+    "apiida-api-control-plane-openapi.yml: declared missing tag: Apis",
+    "apiida-api-gateway-manager-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apiida-api-gateway-manager-openapi.yml: tagged paths GET /gateways/{gatewayId}/apis -> Gateways",
+    "tag 'Deployments' spans 2 source specs (apiida-api-control-plane-openapi.yml, apiida-api-gateway-manager-openapi.yml): per-path servers applied",
+    "superseded outputs removed: apiida-ap-is-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 6 total)"
+  ],
+  "skipped": [
+    "apiida-alarms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apiida-ap-is-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apiida-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apiida-gateways-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apiida-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "apiida-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

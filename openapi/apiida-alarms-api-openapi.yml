@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: APIIDA API Control Plane Alarms API
-  description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
+  title: APIIDA API Gateway Manager Alarms API
+  description: REST API for the APIIDA API Gateway Manager, enabling programmatic management of Broadcom Layer7 API gateways. Supports gateway registration, API deployment and migration, monitoring and metrics collection, and alarm configuration across managed gateway instances.
   version: '1.0'
   contact:
     name: APIIDA Support
@@ -129,5 +129,5 @@ components:
       scheme: bearer
       description: Bearer token authentication
 externalDocs:
-  description: APIIDA Documentation
-  url: https://apiida.atlassian.net
+  description: APIIDA API Gateway Manager Documentation
+  url: https://apiida.atlassian.net/wiki/spaces/AAGM

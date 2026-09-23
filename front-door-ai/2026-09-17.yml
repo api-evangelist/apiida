@@ -1,0 +1,34 @@
+# Front Door AI Index — apiida — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: apiida
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: apiida.com
+  final_host: boomi.com
+  ownership: own
+  owner: apiida
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 109
+  host_score: 109
+  density: 30.4
+  words: 3585
+  tiers:
+    agentic: 46
+    core: 61
+    model: 2
+  ambiguous: 57
+  top_terms:
+    AI: 61
+    agent: 46
+    MCP: 18
+    agentic: 15
+    AI agent: 10
+    automation: 10
+    ChatGPT: 2
+    retrieval-augmented: 2
+    intelligence: 1
+    model context protocol: 1

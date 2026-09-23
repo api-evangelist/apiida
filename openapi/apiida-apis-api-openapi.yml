@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: APIIDA API Control Plane Alarms Apis API
+  title: APIIDA API Control Plane APIS API
   description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
   version: '1.0'
   contact:
@@ -16,7 +16,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Apis
+- name: APIs
 paths:
   /apis/analyzeOpenProxySpec:
     post:
@@ -24,7 +24,7 @@ paths:
       summary: APIIDA Validate Open Proxy Specification
       description: Validate an Open Proxy Specification file to check for errors and compatibility before creating API versions.
       tags:
-      - Apis
+      - APIs
       requestBody:
         required: true
         content:
