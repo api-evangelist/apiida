@@ -160,43 +160,6 @@ paths:
           description: Gateway not found
 components:
   schemas:
-    Gateway:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique gateway identifier
-        name:
-          type: string
-          description: Display name of the gateway
-        host:
-          type: string
-          description: Hostname or IP of the gateway
-        port:
-          type: integer
-          description: Gateway management port
-        status:
-          type: string
-          enum:
-          - connected
-          - disconnected
-          - error
-          description: Current connection status
-        type:
-          type: string
-          description: Gateway type (e.g. Layer7)
-        version:
-          type: string
-          description: Gateway software version
-        apiCount:
-          type: integer
-          description: Number of APIs deployed on this gateway
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
     GatewayRegistration:
       type: object
       required:
@@ -246,6 +209,43 @@ components:
         lastDeployed:
           type: string
           format: date-time
+    Gateway:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique gateway identifier
+        name:
+          type: string
+          description: Display name of the gateway
+        host:
+          type: string
+          description: Hostname or IP of the gateway
+        port:
+          type: integer
+          description: Gateway management port
+        status:
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - error
+          description: Current connection status
+        type:
+          type: string
+          description: Gateway type (e.g. Layer7)
+        version:
+          type: string
+          description: Gateway software version
+        apiCount:
+          type: integer
+          description: Number of APIs deployed on this gateway
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
   parameters:
     limit:
       name: limit
@@ -254,13 +254,6 @@ components:
         type: integer
         default: 20
       description: Maximum number of items to return
-    gatewayId:
-      name: gatewayId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The gateway identifier
     offset:
       name: offset
       in: query
@@ -268,6 +261,13 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    gatewayId:
+      name: gatewayId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The gateway identifier
   securitySchemes:
     bearerAuth:
       type: http

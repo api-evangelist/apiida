@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: APIIDA API Control Plane APIS API
+  title: APIIDA API Control Plane APIs API
   description: REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways.
   version: '1.0'
   contact:

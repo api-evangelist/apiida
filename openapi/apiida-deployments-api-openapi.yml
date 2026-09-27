@@ -140,13 +140,6 @@ paths:
           default: example
 components:
   parameters:
-    version:
-      name: version
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The API version identifier
     apiId:
       name: apiId
       in: path
@@ -154,6 +147,13 @@ components:
       schema:
         type: string
       description: The API identifier
+    version:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The API version identifier
     deploymentId:
       name: deploymentId
       in: path
