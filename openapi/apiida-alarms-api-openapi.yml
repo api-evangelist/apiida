@@ -67,6 +67,32 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    AlarmRequest:
+      type: object
+      required:
+      - name
+      - gatewayId
+      - metric
+      - threshold
+      - condition
+      properties:
+        name:
+          type: string
+        gatewayId:
+          type: string
+        metric:
+          type: string
+        threshold:
+          type: number
+        condition:
+          type: string
+          enum:
+          - above
+          - below
+          - equals
+        enabled:
+          type: boolean
+          default: true
     Alarm:
       type: object
       properties:
@@ -97,32 +123,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    AlarmRequest:
-      type: object
-      required:
-      - name
-      - gatewayId
-      - metric
-      - threshold
-      - condition
-      properties:
-        name:
-          type: string
-        gatewayId:
-          type: string
-        metric:
-          type: string
-        threshold:
-          type: number
-        condition:
-          type: string
-          enum:
-          - above
-          - below
-          - equals
-        enabled:
-          type: boolean
-          default: true
   securitySchemes:
     bearerAuth:
       type: http

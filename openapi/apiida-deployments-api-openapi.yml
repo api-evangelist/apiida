@@ -140,13 +140,6 @@ paths:
           default: example
 components:
   parameters:
-    apiId:
-      name: apiId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The API identifier
     version:
       name: version
       in: path
@@ -154,20 +147,13 @@ components:
       schema:
         type: string
       description: The API version identifier
-    deploymentId:
-      name: deploymentId
+    apiId:
+      name: apiId
       in: path
       required: true
       schema:
         type: string
-      description: The deployment identifier
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-      description: Maximum number of items to return
+      description: The API identifier
     offset:
       name: offset
       in: query
@@ -175,6 +161,20 @@ components:
         type: integer
         default: 0
       description: Pagination offset
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+      description: Maximum number of items to return
+    deploymentId:
+      name: deploymentId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The deployment identifier
   schemas:
     DeploymentRequest:
       type: object

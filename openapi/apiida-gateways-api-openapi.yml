@@ -159,7 +159,51 @@ paths:
         '404':
           description: Gateway not found
 components:
+  parameters:
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Pagination offset
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 20
+      description: Maximum number of items to return
+    gatewayId:
+      name: gatewayId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The gateway identifier
   schemas:
+    GatewayApi:
+      type: object
+      properties:
+        id:
+          type: string
+          description: API identifier on the gateway
+        name:
+          type: string
+          description: API name
+        version:
+          type: string
+          description: API version
+        status:
+          type: string
+          enum:
+          - active
+          - disabled
+          - deprecated
+          description: API status on the gateway
+        lastDeployed:
+          type: string
+          format: date-time
     GatewayRegistration:
       type: object
       required:
@@ -187,28 +231,6 @@ components:
             password:
               type: string
           description: Credentials for connecting to the gateway
-    GatewayApi:
-      type: object
-      properties:
-        id:
-          type: string
-          description: API identifier on the gateway
-        name:
-          type: string
-          description: API name
-        version:
-          type: string
-          description: API version
-        status:
-          type: string
-          enum:
-          - active
-          - disabled
-          - deprecated
-          description: API status on the gateway
-        lastDeployed:
-          type: string
-          format: date-time
     Gateway:
       type: object
       properties:
@@ -246,28 +268,6 @@ components:
         updatedAt:
           type: string
           format: date-time
-  parameters:
-    limit:
-      name: limit
-      in: query
-      schema:
-        type: integer
-        default: 20
-      description: Maximum number of items to return
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Pagination offset
-    gatewayId:
-      name: gatewayId
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The gateway identifier
   securitySchemes:
     bearerAuth:
       type: http
