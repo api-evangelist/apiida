@@ -198,6 +198,9 @@ apis:
   - type: JSONSchema
     url: json-schema/apiida-gateway.json
 common:
+  - type: CapabilityMap
+    url: capabilities/apiida-capability-edges.yml
+    name: APIIDA Business Capability Map
   - type: ParentCompany
     name: Boomi
     url: https://boomi.com/

@@ -1,0 +1,36 @@
+slug: apiida
+provider: APIIDA
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Deployments
+  spec_file: apiida-deployments-api-openapi.yml
+  capability_id: BC-4210.40
+  capability_id_l1: BC-4210
+  capability_name: Deployment Orchestration
+  confidence: 0.75
+  evidence: POST /apis/{apiId}/versions/{version}/importIntoGateways 'Deploy API to Gateways'; GET /deployments/{deploymentId}
+    'Get Deployment Status'
+  reason: Operations deploy API versions to gateway environments and track deployment status — deployment
+    orchestration of software changes.
+- tag: Versions
+  spec_file: apiida-versions-api-openapi.yml
+  capability_id: BC-4270.10
+  capability_id_l1: BC-4270
+  capability_name: Public API Lifecycle Management
+  confidence: 0.7
+  evidence: POST /apis/{apiId}/versions  createApiVersion  APIIDA Create API Version; PUT /apis/{apiId}/versions/{version}/openProxySpec  uploadOpenProxySpec  APIIDA
+    Upload Specification to API Version
+  reason: Operations create API versions and attach proxy/OpenAPI specifications, which is specification
+    and versioning of APIs exposed through gateways — Public API Lifecycle Management. Some ambiguity
+    since this is an internal federated control plane rather than strictly external developer-facing APIs.
