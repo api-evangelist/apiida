@@ -1,4 +1,4 @@
-# APIIDA (apiida)
+# APIIDA
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,88 +66,170 @@
 
 APIIDA provides market-leading solutions for multi-vendor, cross-platform federated API management. The APIIDA API Control Plane enables enterprises to discover, govern, and provision APIs from a central location, while the API Gateway Manager automates API operations for Broadcom Layer7 environments with comprehensive deployment, migration, monitoring, and alarming capabilities.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/apiida/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/apiida/refs/heads/main/apis.yml)
+**Areas:** API Gateway · API Management · Federated API Management · Governance · Layer-7
 
-## Scope
+## APIIDA on APIs.io
 
-- **Type:** Index
+Everything profiled for APIIDA is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apiida/](https://apis.io/providers/apiida/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (6)
 
-- API Gateway
-- API Management
-- Federated API Management
-- Governance
-- Layer7
+- [APIIDA Alarms API](https://apis.io/apis/apiida/apiida-alarms-api/) — Alarm configuration and management
+- [APIIDA Deployments API](https://apis.io/apis/apiida/apiida-deployments-api/) — Gateway deployment operations
+- [APIIDA Gateways API](https://apis.io/apis/apiida/apiida-gateways-api/) — Gateway registration and management operations
+- [APIIDA Monitoring API](https://apis.io/apis/apiida/apiida-monitoring-api/) — Metrics and monitoring operations
+- [APIIDA Versions API](https://apis.io/apis/apiida/apiida-versions-api/) — API version management
+- [APIIDA APIS API](https://apis.io/apis/apiida/apiida-apis-api/) — The Apis API from APIIDA — 1 operation(s) for apis.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-01-08
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### APIIDA API Control Plane
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for the APIIDA API Control Plane, enabling programmatic management of APIs across multiple API gateways. Supports validation of proxy specifications, API version management, and deployment to gateways from a central federated control plane.
+- [Apiida Agentic Access](https://apis.io/agentic-access/apiida/apiida-agentic-access/)
 
-- **Human URL:** [https://apiida.com/product/apiida-api-control-plane/](https://apiida.com/product/apiida-api-control-plane/)
-- **Base URL:** `https://api.apiida.com`
+#### JSON Schema (3)
 
-#### Tags
+The data models the API reads and writes.
 
-- API Lifecycle
-- API Management
-- Federated Control Plane
-- Governance
+- [APIIDA API](https://apis.io/schemas/apiida/apiida-api/)
+- [APIIDA Deployment](https://apis.io/schemas/apiida/apiida-deployment/)
+- [APIIDA Gateway](https://apis.io/schemas/apiida/apiida-gateway/)
 
-#### Properties
+#### JSON Structure (3)
 
-- [Documentation](https://apiida.com/product/apiida-api-control-plane/)
-- [OpenAPI](openapi/apiida-api-control-plane-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apiida-api-control-plane.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apiida-api-control-plane.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/apiida-api.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/apiida-deployment.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/apiida-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+Data models expressed in JSON Structure.
 
-### APIIDA API Gateway Manager
+- [Apiida Api Structure](https://apis.io/json-structure/apiida/apiida-api-structure/)
+- [Apiida Deployment Structure](https://apis.io/json-structure/apiida/apiida-deployment-structure/)
+- [Apiida Gateway Structure](https://apis.io/json-structure/apiida/apiida-gateway-structure/)
 
-REST API for the APIIDA API Gateway Manager, enabling programmatic management of Broadcom Layer7 API gateways. Supports gateway registration, API deployment and migration, monitoring and metrics collection, and alarm configuration across managed gateway instances.
+#### JSON-LD (1)
 
-- **Human URL:** [https://apiida.com/product/apiida-api-gateway-manager/](https://apiida.com/product/apiida-api-gateway-manager/)
-- **Base URL:** `https://api.apiida.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Apiida Context](https://apis.io/jsonld/apiida/apiida-context/)
 
-- API Deployments
-- API Gateway
-- Layer7
-- Monitoring
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://apiida.com/product/apiida-api-gateway-manager/)
-- [Documentation](https://apiida.atlassian.net/wiki/spaces/AAGM)
-- [OpenAPI](openapi/apiida-api-gateway-manager-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apiida-api-gateway-manager.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apiida-api-gateway-manager.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/apiida-gateway.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/apiida-deployment.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/apiida-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Apiida Vocabulary](https://apis.io/vocabularies/apiida/apiida-vocabulary/)
 
-## Common Properties
+#### Examples (3)
 
-- [LinkedIn](https://www.linkedin.com/company/apiida)
+Example requests and responses.
+
+- [Apiida Api Example](https://apis.io/examples/apiida/apiida-api-example/)
+- [Apiida Deployment Example](https://apis.io/examples/apiida/apiida-deployment-example/)
+- [Apiida Gateway Example](https://apis.io/examples/apiida/apiida-gateway-example/)
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [APIIDA API Control Plane Alarms API](https://apis.io/collections/apiida/open-apiida-alarms-api/)
+- [APIIDA API Control Plane](https://apis.io/collections/apiida/open-apiida-api-control-plane/)
+- [APIIDA API Gateway Manager](https://apis.io/collections/apiida/open-apiida-api-gateway-manager/)
+- [APIIDA API Control Plane Alarms Apis API](https://apis.io/collections/apiida/open-apiida-apis-api/)
+- [APIIDA API Control Plane Alarms Deployments API](https://apis.io/collections/apiida/open-apiida-deployments-api/)
+- [APIIDA API Control Plane Alarms Gateways API](https://apis.io/collections/apiida/open-apiida-gateways-api/)
+- [APIIDA API Control Plane Alarms Monitoring API](https://apis.io/collections/apiida/open-apiida-monitoring-api/)
+- [APIIDA API Control Plane Alarms Versions API](https://apis.io/collections/apiida/open-apiida-versions-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [APIIDA — jsonschema rules](https://apis.io/rules/apiida/apiida-jsonschema-spectral-rules/)
+- [APIIDA API Rules](https://apis.io/rules/apiida/apiida-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apiida Authentication](https://apis.io/security/apiida/apiida-authentication/)
+- [Apiida Domain Security](https://apis.io/security/apiida/apiida-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apiida Plans Pricing](https://apis.io/plans/apiida/apiida-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apiida Rate Limits](https://apis.io/rate-limits/apiida/apiida-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apiida Finops](https://apis.io/finops/apiida/apiida-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://apiida.com/)
 - [Documentation](https://apiida.atlassian.net/wiki/spaces/AAGM)
 - [Support](https://apiida.com/support/?lang=en)
-- [GitHub Organization](https://github.com/apiida)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Solutions](undefined)
+- [GitHub](https://github.com/apiida)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
+**Kin Score 31.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 65.6 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apiida/](https://apis.io/providers/apiida/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for APIIDA: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apiida/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
